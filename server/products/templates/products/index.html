@@ -1,0 +1,27 @@
+{% extends 'main/master.html' %}
+
+{% block page_title %}
+About page
+{% endblock %}
+
+{% block page_content %}
+    <div class="page__content">
+        <h1 class="page__title">
+            Каталог
+        </h1>
+        <ul class="product-list">
+        {% for itm in products %}
+            <li>
+                <span class="product-list__item-name">{{ itm.name }}</span>
+                {% if itm.description|length < 15 %}
+                <span class="product-list__item-description">{{ itm.description}}</span>
+                {% else %}
+                <span class="product-list__item-description">{{ itm.description|slice:"0:15" }}...</span>
+                {% endif %}
+                <span class="product-list__item-cost">{{ itm.cost}}</span>
+                <a href="{% url 'products:detail' pk=itm.id %}">Перейти</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
